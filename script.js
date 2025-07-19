@@ -42,8 +42,8 @@ function resetGame() {
 }
 
 function generateQuestion() {
-  num1 = Math.floor(Math.random() * 10);
-  num2 = Math.floor(Math.random() * 10);
+  num1 = Math.floor(Math.random() * 1000);
+  num2 = Math.floor(Math.random() * 1000);
   correctAnswer = num1 + num2; // Change to * or - for variety
   document.getElementById("question").textContent = `What is ${num1} + ${num2}?`;
   document.getElementById("answer").value = "";
