@@ -22,24 +22,43 @@ function checkAnswer() {
   setTimeout(generateQuestion, 1500); // Generate next after delay
 }
 
+function toggleDark() {
+  const body = document.body;
+  const button = document.querySelector("button");
+
+  // Toggle the 'dark' class
+  body.classList.toggle("dark");
+
+  // Optionally change the button icon/text
+  if (body.classList.contains("dark")) {
+    button.textContent = "☀️ Toggle Light Mode";
+    localStorage.setItem("theme", "dark");
+  } else {
+    button.textContent = "🌙 Toggle Dark Mode";
+    localStorage.setItem("theme", "light");
+  }
+}
+
+document.getElementById("answer").addEventListener("input", function () {
+  const val = this.value.trim();
+
+  // Ignore empty or incomplete inputs
+  if (val === "" || val === "-") {
+    document.getElementById("feedback").textContent = "";
+    return;
+  }
+
+  const userAnswer = parseInt(val, 10);
+  if (isNaN(userAnswer)) return;
+
+  if (userAnswer === correctAnswer) {
+    document.getElementById("feedback").textContent = "✅ Correct!";
+    score++;
+    document.getElementById("score").textContent = score;
+    setTimeout(generateQuestion, 50);
+  }
+});
+
 // Start with a question
 generateQuestion();
 
-// Theme toggle logic
-document.getElementById("toggle-theme").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-});
-
-const themeBtn = document.getElementById("toggle-theme");
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark");
-  themeBtn.textContent = "☀️";
-}
-
-themeBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  const isDark = document.body.classList.contains("dark");
-  themeBtn.textContent = isDark ? "☀️" : "🌙";
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});

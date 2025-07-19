@@ -7,13 +7,12 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <button id="toggle-theme" class="theme-toggle">🌙 Toggle Dark Mode</button>
+  <button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
   <div class="quiz-container">
     <h1>🧠 Random Math Quiz</h1>
     <div id="question" class="question">What is 5 + 3?</div>
 
     <input type="number" id="answer" placeholder="Enter your answer" />
-    <button onclick="checkAnswer()">Submit</button>
 
     <p id="feedback" class="feedback"></p>
     <p class="score">Score: <span id="score">0</span></p>
