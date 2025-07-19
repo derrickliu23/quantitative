@@ -24,3 +24,9 @@ function checkAnswer() {
 
 // Start with a question
 generateQuestion();
+
+// Theme toggle logic
+document.getElementById("toggle-theme").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
+
