@@ -1,5 +1,45 @@
 let num1, num2, correctAnswer;
 let score = 0;
+let timer;
+const maxTime = 30; // seconds
+let timeLeft = maxTime;
+
+const timerDisplay = document.getElementById("timer");
+const endScreen = document.getElementById("end-screen");
+const finalScoreDisplay = document.getElementById("final-score");
+const tryAgainBtn = document.getElementById("try-again");
+const quizContainer = document.querySelector(".quiz-container");
+
+function startTimer() {
+  clearInterval(timer);
+  timeLeft = maxTime;
+  timerDisplay.textContent = `Time left: ${timeLeft}s`;
+
+  timer = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = `Time left: ${timeLeft}s`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      showEndScreen();
+    }
+  }, 1000);
+}
+
+function showEndScreen() {
+  quizContainer.style.display = "none";
+  endScreen.style.display = "block";
+  finalScoreDisplay.textContent = score;
+}
+
+function resetGame() {
+  score = 0;
+  document.getElementById("score").textContent = score;
+  endScreen.style.display = "none";
+  quizContainer.style.display = "block";
+  generateQuestion();
+  startTimer();
+}
 
 function generateQuestion() {
   num1 = Math.floor(Math.random() * 10);
@@ -8,6 +48,7 @@ function generateQuestion() {
   document.getElementById("question").textContent = `What is ${num1} + ${num2}?`;
   document.getElementById("answer").value = "";
   document.getElementById("feedback").textContent = "";
+  startTimer();
 }
 
 function checkAnswer() {
@@ -57,6 +98,10 @@ document.getElementById("answer").addEventListener("input", function () {
     document.getElementById("score").textContent = score;
     setTimeout(generateQuestion, 50);
   }
+});
+
+tryAgainBtn.addEventListener("click", () => {
+  resetGame();
 });
 
 // Start with a question
