@@ -1,1 +1,1 @@
-# quantitative
+# Arithmetic Game
