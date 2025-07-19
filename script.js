@@ -51,18 +51,6 @@ function generateQuestion() {
   startTimer();
 }
 
-function checkAnswer() {
-  const userAnswer = parseInt(document.getElementById("answer").value, 10);
-  if (userAnswer === correctAnswer) {
-    document.getElementById("feedback").textContent = "✅ Correct!";
-    score++;
-  } else {
-    document.getElementById("feedback").textContent = `❌ Incorrect. The correct answer was ${correctAnswer}`;
-  }
-  document.getElementById("score").textContent = score;
-  setTimeout(generateQuestion, 1500); // Generate next after delay
-}
-
 function toggleDark() {
   const body = document.body;
   const button = document.querySelector("button");
